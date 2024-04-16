@@ -1,0 +1,11 @@
+.idea/*
+Pipfile
+Pipfile.lock
+*.pyc
+geckodriver.log
+*.json
+/token.pickle
+/tests/utils/qaaas_lib/FailedScreenshots/*.png
+venv/*
+.cucumber+
+test_data/*.txt
