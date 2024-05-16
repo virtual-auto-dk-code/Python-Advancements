@@ -12,7 +12,18 @@ These are similar to list comprehensions but use round parentheses () instead of
 They generate values on the fly rather than constructing a list.
 
 Generators are memory efficient because they only produce one item at a time and maintain their state between calls.
-This makes them ideal for tasks such as iterating over large files or databases, generating infinite sequences, and processing data streams in real-time.
+This makes them ideal for tasks such as iterating over large files or databases, generating infinite sequences,
+and processing data streams in real-time.
+
+Generators in Python are typically created using the yield keyword to produce a series of values lazily,
+allowing them to be iterated over efficiently.
+However, it's also possible to create generators without using yield by using generator expressions.
+
+Generator expressions are similar to list comprehensions but create generators instead of lists.
+They have a syntax similar to list comprehensions but surrounded by parentheses instead of square brackets.
+Generator expressions are evaluated lazily, meaning they produce values on-the-fly as they are iterated over,
+which can save memory compared to creating a list.
+
 '''
 
 print("---------------------------------------------------------------------------------------------------------------")
@@ -54,22 +65,74 @@ for num in even_gen:
 
 print("---------------------------------------------------------------------------------------------------------------")
 
+# Generator without yield
+even_numbers_generator = (x for x in range(11) if x % 2 == 0)
+print(type(even_numbers_generator))
+
+# Get output way 1
+print("using next ...")
+print(next(even_numbers_generator))
+print(next(even_numbers_generator))
+
+# Get output way 2
+print("using for ...")
+for num in even_numbers_generator:
+    print(num)
+
+'''
+One thing to note is that unlike generator functions created using yield, 
+generator expressions cannot be paused and resumed manually.
+They are more limited in functionality compared to generator functions 
+but can be quite handy for simple cases where lazily producing values is all that's required.
+'''
+
+print("---------------------------------------------------------------------------------------------------------------")
+# Generators can encapsulate complex logic and state.
+def countdown(start):
+    while start > 0:
+        yield start
+        start -= 1
+    yield 'Blast off!'
+
+for val in countdown(5):
+    print(val)
+
+print("---------------------------------------------------------------------------------------------------------------")
+# Generator Comprehension
+# Generator expressions can be used to create generators concisely.
+even_numbers_generator = (x for x in range(10) if x % 2 == 0)
+for num in even_numbers_generator:
+    print(num)
+
+print("---------------------------------------------------------------------------------------------------------------")
+# Generator for File Processing
+# Generators can be used to process large files lazily, line by line, without loading the entire file into memory.
+def process_file(file_name):
+    with open(file_name, 'r') as file:
+        for line in file:
+            yield line.strip()
+
+for line in process_file('example.txt'):
+    print(line)
+
 
 
 print("---------------------------------------------------------------------------------------------------------------")
+# Generator Pipeline
+# Generators can be chained together to form a pipeline for data processing.
+def squares(nums):
+    for num in nums:
+        yield num ** 2
 
+def even(nums):
+    for num in nums:
+        if num % 2 == 0:
+            yield num
 
-
-print("---------------------------------------------------------------------------------------------------------------")
-
-
-
-print("---------------------------------------------------------------------------------------------------------------")
-
-
-
-print("---------------------------------------------------------------------------------------------------------------")
-
+nums = range(10)
+pipeline = even(squares(nums))
+for num in pipeline:
+    print(num)
 
 
 print("---------------------------------------------------------------------------------------------------------------")
