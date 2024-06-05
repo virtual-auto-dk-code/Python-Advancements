@@ -1,0 +1,8 @@
+csveg.py	  faker_eg.py	     PyJHello.py       selectText.py
+datestrtodate.py  futureDate.py      QueryResult.xlsx  SetPasswordTest.py
+dicteleinlist.py  ms_time-epoch.py   randomrange.py    test_selecttext.py
+dictempty.py	  mylog.txt	     Removechar.py     test_totaltime.py
+EmailSplit.py	  mypexpect.py	     Sample.csv        timestamp.py
+envlist.py	  offsetdatetime.py  SampleTest.py     todaysdate.py
+ExcelRead.py	  __pycache__	     score.py
+/home/dkanchan/Kanchan/RHMentorshipProgram/Projects/Python-Advancements/PythonSamples

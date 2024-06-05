@@ -9,9 +9,11 @@ print("-------------------------------------------------------------------------
 # You can create threads by subclassing the Thread class and overriding the run() method.
 import threading
 
+
 class MyThread(threading.Thread):
     def run(self):
         print("Thread started")
+
 
 # Create and start a thread
 thread = MyThread()
@@ -21,14 +23,17 @@ print("\nAlternatively, you can pass a target function to the Thread constructor
 # Alternatively, you can pass a target function to the Thread constructor.
 import threading
 
+
 def my_function():
     print("Thread started")
+
 
 # Create and start a thread
 thread = threading.Thread(target=my_function)
 thread.start()
 
-print("\n---------------------------------------------------------------------------------------------------------------")
+print(
+    "\n---------------------------------------------------------------------------------------------------------------")
 '''
 Thread Synchronization
 
@@ -41,11 +46,13 @@ import threading
 shared_resource = 0
 lock = threading.Lock()
 
+
 def update_shared_resource():
     global shared_resource
     with lock:
         shared_resource += 1
         print(f"Updated shared resource: {shared_resource}")
+
 
 # Create multiple threads to update shared resource
 threads = []
@@ -64,9 +71,11 @@ print("-------------------------------------------------------------------------
 import threading
 import queue
 
+
 def producer(q):
     for i in range(5):
         q.put(i)
+
 
 def consumer(q):
     while True:
@@ -74,6 +83,7 @@ def consumer(q):
         if item is None:
             break
         print(f"Received item: {item}")
+
 
 q = queue.Queue()
 producer_thread = threading.Thread(target=producer, args=(q,))
@@ -90,10 +100,12 @@ print("-------------------------------------------------------------------------
 import threading
 import time
 
+
 def daemon_function():
     while True:
         print("Daemon thread is running")
         time.sleep(1)
+
 
 daemon_thread = threading.Thread(target=daemon_function)
 daemon_thread.daemon = True  # Set as daemon thread
@@ -103,8 +115,57 @@ time.sleep(5)  # Main thread sleeps for 5 seconds
 print("Main thread exiting")
 
 print("---------------------------------------------------------------------------------------------------------------")
+import threading
+
+
+def print_cube(num):
+    print("Cube: {}".format(num * num * num))
+
+
+def print_square(num):
+    print("Square: {}".format(num * num))
+
+
+if __name__ == "__main__":
+    t1 = threading.Thread(target=print_square, args=(10,))
+    t2 = threading.Thread(target=print_cube, args=(10,))
+
+    t1.start()
+    t2.start()
+
+    t1.join()
+    t2.join()
+
+    print("Done!")
 
 print("---------------------------------------------------------------------------------------------------------------")
+import threading
+import os
+
+
+def task1():
+    print("Task 1 assigned to thread: {}".format(threading.current_thread().name))
+    print("ID of process running task 1: {}".format(os.getpid()))
+
+
+def task2():
+    print("Task 2 assigned to thread: {}".format(threading.current_thread().name))
+    print("ID of process running task 2: {}".format(os.getpid()))
+
+
+if __name__ == "__main__":
+    print("ID of process running main program: {}".format(os.getpid()))
+
+    print("Main thread name: {}".format(threading.current_thread().name))
+
+    t1 = threading.Thread(target=task1, name='t1')
+    t2 = threading.Thread(target=task2, name='t2')
+
+    t1.start()
+    t2.start()
+
+    t1.join()
+    t2.join()
 
 print("---------------------------------------------------------------------------------------------------------------")
 
