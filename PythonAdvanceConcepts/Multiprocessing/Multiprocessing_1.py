@@ -11,9 +11,11 @@ print("-------------------------------------------------------------------------
 import multiprocessing
 import os
 
+
 def worker():
     """Function to be executed by each process."""
     print(f"Worker process ID: {os.getpid()}")
+
 
 if __name__ == "__main__":
     # Create multiple processes
@@ -32,10 +34,12 @@ print("-------------------------------------------------------------------------
 # Processes can share data using shared memory, queues, or pipes provided by the multiprocessing module.
 import multiprocessing
 
+
 def worker(shared_value):
     """Function to be executed by each process."""
     shared_value.value += 1
     print(f"Updated value: {shared_value.value}")
+
 
 if __name__ == "__main__":
     shared_value = multiprocessing.Value('i', 0)
@@ -43,6 +47,7 @@ if __name__ == "__main__":
     for _ in range(5):
         process = multiprocessing.Process(target=worker, args=(shared_value,))
         processes.append(process)
+        print(processes)
         process.start()
 
     for process in processes:
@@ -52,10 +57,12 @@ print("--------------")
 # Queues
 import multiprocessing
 
+
 def worker(queue):
     """Function to be executed by each process."""
     item = queue.get()
     print(f"Received item: {item}")
+
 
 if __name__ == "__main__":
     queue = multiprocessing.Queue()
@@ -77,9 +84,11 @@ print("-------------------------------------------------------------------------
 
 import multiprocessing
 
+
 def worker(x):
     """Function to be executed by each process."""
     return x ** 2
+
 
 if __name__ == "__main__":
     with multiprocessing.Pool(processes=3) as pool:
